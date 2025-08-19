@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package toolrpc;
+
+service ToolExecutor {
+  rpc CallFunction (CallFunctionRequest) returns (CallFunctionResponse);
+}
+
+message CallFunctionRequest {
+  string tool_name = 1;
+  bytes input = 2;  // Raw input bytes
+}
+
+message CallFunctionResponse {
+  bool success = 1;
+  bytes output = 2;              // Output in raw bytes
+  string error = 3;              // Human-readable error message
+  map<string, string> metadata = 4;  // Optional extra info
+}
